@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     render() {
-      return this.cardText.replace('<blank>', '<span class="text-decoration-underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>')
+      return this.cardText.replace('_', '<span class="text-decoration-underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>')
     },
     cardColor() {
       return this.type === 'black' ? 'grey darken-4' : 'grey lighten-3'

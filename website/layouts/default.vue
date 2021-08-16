@@ -2,13 +2,9 @@
   <v-app dark>
     <v-main>
       <Header></Header>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-main>
-    <v-footer app>
-      <span>Cards Against Humanity &copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    <Footer></Footer>
   </v-app>
 </template>
 

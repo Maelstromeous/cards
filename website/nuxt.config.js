@@ -3,8 +3,8 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - website',
-    title: 'website',
+    titleTemplate: '%s - Humanity Deck',
+    title: 'Humanity Deck',
     htmlAttrs: {
       lang: 'en',
     },
@@ -20,7 +20,9 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '@/plugins/capitalize.js',
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -31,6 +33,8 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    // https://www.npmjs.com/package/@nuxtjs/fontawesome
+    '@nuxtjs/fontawesome',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -59,6 +63,18 @@ export default {
         },
       },
     },
+  },
+
+  fontawesome: {
+    icons: {
+      solid: [
+        'faCompressAlt',
+        'faExpandAlt',
+        'faEye',
+        'faLock',
+        'faLockOpen',
+      ]
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

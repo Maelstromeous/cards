@@ -23,6 +23,9 @@
 
 <script>
 export default {
+  params: [
+    'id'
+  ],
   data() {
     return {
       id: 12345,
