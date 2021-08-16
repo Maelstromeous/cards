@@ -4,6 +4,12 @@
       <h1 class="text-center">Game #{{ id }}</h1>
     </v-row>
     <v-row>
+      <template>
+        <v-progress-linear value="15"></v-progress-linear>
+        <div class="center">Time left: 00:15</div>
+      </template>
+    </v-row>
+    <v-row>
       <Card :cardText="blackCards[selectedBlackCard]" type="black"></Card>
     </v-row>
     <v-row>

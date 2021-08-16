@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-card elevation="5" height="250" width="200" class="ma-2" :color="cardColor">
-      <v-card-title>
-        <p v-bind:style="{color: textColor}" v-html="render"></p>
+    <v-card elevation="5" width="200" class="ma-2" :color="cardColor" style="word-break: break-word">
+      <v-card-title style="align-items: start">
+        <p v-bind:style="{color: textColor}" v-html="render" style="word-break: break-word"></p>
       </v-card-title>
-      <v-card-actions v-if="type === 'white'">
+      <v-card-actions v-if="type === 'white'" class="flex-row-reverse">
         <v-btn elevation="2" color="primary">Pick</v-btn>
       </v-card-actions>
     </v-card>
@@ -14,7 +14,7 @@
 <script>
 export default {
   data() {
-    return []
+    return {}
   },
   computed: {
     render() {
