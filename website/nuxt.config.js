@@ -50,7 +50,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -68,11 +68,13 @@ export default {
   fontawesome: {
     icons: {
       solid: [
+        'faAdjust',
         'faCompressAlt',
         'faExpandAlt',
         'faEye',
         'faLock',
         'faLockOpen',
+        'faMoon',
       ]
     }
   },

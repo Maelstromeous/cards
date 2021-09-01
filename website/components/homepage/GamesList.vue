@@ -2,7 +2,7 @@
   <v-row justify="center" align="center">
     <v-col cols="12">
       <v-row justify="center">
-        <h1>Running Games</h1>
+        <h1>Open Games</h1>
       </v-row>
       <v-row>
         <v-col cols="12" md="3">
@@ -26,8 +26,18 @@
             loading-text="Give me a god damn minute will ya..."
           >
             <template v-slot:item.locked="{ item }">
-              <span v-if="item.locked"><font-awesome-icon icon="lock"></font-awesome-icon></span>
-              <span v-if="!item.locked"><font-awesome-icon icon="lock-open"></font-awesome-icon></span>
+              <v-tooltip bottom v-if="item.locked">
+                <template v-slot:activator="{ on, attrs }">
+                  <span v-bind="attrs" v-on="on"><font-awesome-icon icon="lock"></font-awesome-icon></span>
+                </template>
+                <span>Game is locked with a password</span>
+              </v-tooltip>
+              <v-tooltip bottom v-if="!item.locked">
+                <template v-slot:activator="{ on, attrs }">
+                  <span v-bind="attrs" v-on="on"><font-awesome-icon icon="lock-open"></font-awesome-icon></span>
+                </template>
+                <span>Game is open to anyone, host will be asked to accept you</span>
+              </v-tooltip>
             </template>
             <template v-slot:item.people.players.length="{ item }">
               <v-tooltip bottom>
@@ -175,6 +185,30 @@ export default {
               {name: "SomeAnnoyingDude"},
               {name: "A lady in red"},
               {name: "A guy in blue"}
+            ]
+          },
+          options: {
+            pointsToWin: 5,
+            maxPlayers: 5,
+          },
+          winConditions: {
+            type: 'tsar',
+          }
+        },
+        {
+          id: 'swimming-bears',
+          name: 'A open game',
+          status: 'playing',
+          locked: false,
+          validToJoin: true,
+          people: {
+            host: {
+              name: "Biohunter"
+            },
+            players: [
+              {name: "SomeAwesomeDude"},
+              {name: "SomeAnnoyingDude"},
+              {name: "A lady in red"},
             ]
           },
           options: {
