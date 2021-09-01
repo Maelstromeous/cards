@@ -26,7 +26,6 @@ export default {
     // If not set or indeed set to white
 
     const isDarkAlready = this.getIsDark();
-    console.log('isDarkAlready', isDarkAlready)
 
     if (isDarkAlready === 'true') {
       this.$vuetify.theme.dark = true;

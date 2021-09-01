@@ -78,8 +78,10 @@
 export default {
   data() {
     return {
+      socket: null,
       search: '',
       loading: false,
+      games: [],
       headers: [
         {
           text: '',
@@ -118,108 +120,30 @@ export default {
           sortable: false,
           value: 'actions',
         },
-      ],
-      games: [
-        {
-          id: 'swimming-pelicans',
-          name: 'Mael\'s Game',
-          status: 'lobby',
-          locked: true,
-          validToJoin: true,
-          people: {
-            host: {
-              name: "Maelstromeous"
-            },
-            players: [
-              {name: "SomeAwesomeDude"},
-              {name: "SomeAnnoyingDude"},
-              {name: "A lady in red"},
-            ]
-          },
-          options: {
-            pointsToWin: 4,
-            maxPlayers: 10,
-          },
-          winConditions: {
-            type: 'tsar',
-          }
-        },
-        {
-          id: 'shark-tale',
-          name: 'A medium game',
-          status: 'lobby',
-          locked: true,
-          validToJoin: true,
-          people: {
-            host: {
-              name: "Warcore"
-            },
-            players: [
-              {name: "SomeAwesomeDude"},
-              {name: "SomeAnnoyingDude"},
-              {name: "A lady in red"},
-              {name: "A dude in blue"},
-              {name: "A gentlemen in blue"},
-            ]
-          },
-          options: {
-            pointsToWin: 5,
-            maxPlayers: 7,
-          },
-          winConditions: {
-            type: 'tsar',
-          }
-        },
-        {
-          id: 'swimming-fish',
-          name: 'A full game',
-          status: 'lobby',
-          locked: true,
-          validToJoin: false,
-          people: {
-            host: {
-              name: "Fryla"
-            },
-            players: [
-              {name: "SomeAwesomeDude"},
-              {name: "SomeAnnoyingDude"},
-              {name: "A lady in red"},
-              {name: "A guy in blue"}
-            ]
-          },
-          options: {
-            pointsToWin: 5,
-            maxPlayers: 5,
-          },
-          winConditions: {
-            type: 'tsar',
-          }
-        },
-        {
-          id: 'swimming-bears',
-          name: 'A open game',
-          status: 'playing',
-          locked: false,
-          validToJoin: true,
-          people: {
-            host: {
-              name: "Biohunter"
-            },
-            players: [
-              {name: "SomeAwesomeDude"},
-              {name: "SomeAnnoyingDude"},
-              {name: "A lady in red"},
-            ]
-          },
-          options: {
-            pointsToWin: 5,
-            maxPlayers: 5,
-          },
-          winConditions: {
-            type: 'tsar',
-          }
-        }
       ]
+    }
+  },
+  created() {
+    this.socket = this.$nuxtSocket({
+      name: 'main',
+      channel: '/game',
+    })
+
+    this.socket.on('connect', () => {
+      console.log('socket connected!');
+      this.getGames();
+    })
+
+    this.socket.on('event', (msg, cb) => {
+      console.log('event received!', msg)
+    })
+  },
+  methods: {
+    getGames() {
+      this.socket.emit('findAllGame', (res) => {
+        console.log('got list of games', res);
+        this.games = res;
+      })
     }
   }
 }

@@ -41,6 +41,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    // https://www.npmjs.com/package/nuxt-socket-io
+    'nuxt-socket-io',
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -77,6 +79,19 @@ export default {
         'faMoon',
       ]
     }
+  },
+
+  io: {
+    sockets: [
+      {
+        name: 'main',
+        url: 'http://localhost:3001',
+        default: true,
+        namespaces: {
+          '/game': {}
+        }
+      }
+    ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
