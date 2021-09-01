@@ -1,7 +1,12 @@
-import { WebSocketGateway, SubscribeMessage, MessageBody } from '@nestjs/websockets';
+import {
+  WebSocketGateway,
+  SubscribeMessage,
+  MessageBody,
+} from '@nestjs/websockets';
 import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
+import { GameInterface } from '../../../interfaces/GameInterface';
 
 @WebSocketGateway({
   namespace: 'game',
@@ -16,13 +21,14 @@ export class GameGateway {
   }
 
   @SubscribeMessage('findAllGame')
-  findAll() {
+  findAll(): GameInterface[] {
     console.log('findAllGame');
     return this.gameService.findAll();
   }
 
   @SubscribeMessage('findOneGame')
-  findOne(@MessageBody() id: number) {
+  findOne(@MessageBody() id: string): GameInterface {
+    console.log('findOneGame');
     return this.gameService.findOne(id);
   }
 

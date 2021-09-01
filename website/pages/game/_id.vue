@@ -1,18 +1,18 @@
 <template>
-  <v-row>
-    <v-col cols="12">
-      Game ID: {{ this.id }}
-      <GameGame></GameGame>
-    </v-col>
-  </v-row>
+  <section>
+    <GameState v-if="id" :id="id"></GameState>
+  </section>
 </template>
 
 <script>
 export default {
-  name: 'Game',
-  async asyncData({ params }) {
-    const id = params.id
-    return { id }
-  }
-};
+  data() {
+    return {
+      id: '',
+    }
+  },
+  fetch() {
+    this.id = this.$route.params.id
+  },
+}
 </script>

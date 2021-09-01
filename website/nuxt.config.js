@@ -20,9 +20,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    '@/plugins/capitalize.js',
-  ],
+  plugins: ['@/plugins/capitalize.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -77,8 +75,8 @@ export default {
         'faLock',
         'faLockOpen',
         'faMoon',
-      ]
-    }
+      ],
+    },
   },
 
   io: {
@@ -88,10 +86,15 @@ export default {
         url: 'http://localhost:3001',
         default: true,
         namespaces: {
-          '/game': {}
-        }
-      }
-    ]
+          '/game': {},
+        },
+      },
+    ],
+  },
+
+  http: {
+    host: 'http://localhost',
+    port: 3001,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
