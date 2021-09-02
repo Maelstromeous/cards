@@ -71,8 +71,8 @@
             <template #item.status="{ item }">
               {{ item.status | capitalize }}
             </template>
-            <template #item.winConditions.type="{ item }">
-              {{ item.winConditions.type | capitalize }}
+            <template #item.options.gameType="{ item }">
+              {{ item.options.gameType | capitalize }}
             </template>
             <template #item.actions="{ item }">
               <NuxtLink
@@ -93,14 +93,19 @@
   </v-row>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+// eslint-disable-next-line import/named
+import { NuxtSocket } from 'nuxt-socket-io'
+import { GameInterface } from '../../../interfaces/GameInterface'
+
+export default Vue.extend({
   data() {
     return {
-      gameSocket: null,
+      gameSocket: null as NuxtSocket | null,
       search: '',
       loading: false,
-      games: [],
+      games: [] as GameInterface[],
       headers: [
         {
           text: '',
@@ -131,7 +136,7 @@ export default {
         {
           text: 'Game Type',
           align: 'center',
-          value: 'winConditions.type',
+          value: 'options.gameType',
         },
         {
           text: '',
@@ -143,23 +148,23 @@ export default {
     }
   },
   created() {
-    this.socket = this.$nuxtSocket({
+    this.gameSocket = this.$nuxtSocket({
       name: 'main',
       channel: '/game',
     })
 
-    this.gameSocket.on('connect', () => {
+    this.gameSocket?.on('connect', () => {
       console.log('Game List socket connected!')
       this.getGames()
     })
   },
   methods: {
     getGames() {
-      this.gameSocket.emit('findAllGame', (res) => {
+      this.gameSocket?.emit('findAllGame', (res: GameInterface[]) => {
         console.log('got list of games', res)
         this.games = res
       })
     },
   },
-}
+})
 </script>

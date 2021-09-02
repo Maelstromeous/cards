@@ -44,7 +44,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: 'http://localhost:3001',
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -90,11 +92,6 @@ export default {
         },
       },
     ],
-  },
-
-  http: {
-    host: 'http://localhost',
-    port: 3001,
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
