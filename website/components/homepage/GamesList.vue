@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12">
@@ -80,10 +81,10 @@
                 :to="{ name: 'game-id', params: { id: item.id } }"
                 no-prefetch
               >
-                <v-btn class="primary">Join!</v-btn>
+                <v-btn class="primary">Join</v-btn>
               </NuxtLink>
               <v-btn v-if="!item.validToJoin" class="primary" disabled
-                >Join!</v-btn
+                >Join</v-btn
               >
             </template>
           </v-data-table>
