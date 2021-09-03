@@ -5,5 +5,6 @@ export interface PersonInterface {
     name: string
     score: number
     ready: boolean
+    isHost: boolean
     chosenCard: CardInterface['id']
 }

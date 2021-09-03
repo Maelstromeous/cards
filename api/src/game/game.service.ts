@@ -29,25 +29,27 @@ export class GameService {
 
   public game = {
     id: 'foobar',
-    name: 'Pigs DONTfly!',
+    name: 'Pigs DONT fly!',
     status: GameStatus.PLAYING,
     locked: false,
     validToJoin: true,
-    roundCount: 2,
+    roundCount: 1,
     people: {
-      host: {
-        id: '7f660100-9b29-4d43-b2dc-85fa606c7123',
-        name: 'Maelstromeous',
-        score: 1,
-        ready: true,
-        chosenCard: 'card30',
-      },
       players: [
+        {
+          id: '7f660100-9b29-4d43-b2dc-85fa606c7123',
+          name: 'Maelstromeous',
+          score: 1,
+          ready: true,
+          isHost: true,
+          chosenCard: 'card30',
+        },
         {
           id: 'dc0a7afd-62af-4706-87da-5082565a9310',
           name: 'Some AwesomeDude',
           score: 0,
           ready: true,
+          isHost: false,
           chosenCard: 'card40',
         },
         {
@@ -55,6 +57,7 @@ export class GameService {
           name: 'Some AwesomeLady',
           score: 0,
           ready: false,
+          isHost: false,
           chosenCard: null,
         },
       ],

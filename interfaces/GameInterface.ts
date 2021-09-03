@@ -17,7 +17,6 @@ export interface GameInterface {
 }
 
 export interface GamePeopleInterface {
-    host: PersonInterface
     players: PersonInterface[]
     spectators?: PersonInterface[]
 }

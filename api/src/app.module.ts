@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { CardModule } from './card/card.module';
 import { GameModule } from './game/game.module';
+import { GamechatModule } from './gamechat/gamechat.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { GameModule } from './game/game.module';
     }),
     CardModule,
     GameModule,
+    GamechatModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -38,28 +38,7 @@
             </v-row>
           </v-col>
           <v-col cols="12" md="4" lg="3">
-            <v-card outlined>
-              <v-card-title>Chat</v-card-title>
-              <v-card-text>
-                <v-skeleton-loader
-                  v-for="i in 6"
-                  :key="i"
-                  type="list-item-three-line"
-                ></v-skeleton-loader>
-              </v-card-text>
-              <v-divider class="mx-4"></v-divider>
-
-              <v-card-actions class="mb-1">
-                <v-text-field
-                  class="mx-2"
-                  filled
-                  dense
-                  hide-details
-                  placeholder="Enter your message"
-                  append-icon="mdi-send"
-                ></v-text-field>
-              </v-card-actions>
-            </v-card>
+            <GameChat :game-id="state.id" :people="state.people"></GameChat>
           </v-col>
         </v-row>
       </div>
