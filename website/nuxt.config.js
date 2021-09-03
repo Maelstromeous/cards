@@ -1,6 +1,9 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  env: {
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - Humanity Deck',
@@ -41,6 +44,8 @@ export default {
     '@nuxtjs/axios',
     // https://www.npmjs.com/package/nuxt-socket-io
     'nuxt-socket-io',
+    // https://www.npmjs.com/package/nuxt-clipboard
+    ['nuxt-clipboard', { autoSetContainer: true }],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -71,6 +76,7 @@ export default {
     icons: {
       solid: [
         'faAdjust',
+        'faCopy',
         'faCompressAlt',
         'faExpandAlt',
         'faEye',
