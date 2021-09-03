@@ -24,7 +24,6 @@
             v-model="username"
             :rules="[rules.required, rules.minName, rules.maxName]"
             :counter="40"
-            label="And you are?"
             required
             @change="updateUsername"
           ></v-text-field

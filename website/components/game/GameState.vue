@@ -1,27 +1,70 @@
 <template>
-  <v-container>
-    <div v-if="!loading">
-      <v-row>
-        <h1 class="text-center">Game "{{ state.name }}"</h1>
-      </v-row>
-      <v-row>
-        <template>
-          <v-progress-linear value="15"></v-progress-linear>
-          <div class="center">Time left: 00:15</div>
-        </template>
-      </v-row>
-      <v-row>
-        <GameCard v-if="blackCard" :card="blackCard"></GameCard>
-      </v-row>
-      <v-row>
-        <GameCard
-          v-for="card in whiteCards"
-          :key="card.id"
-          :card="card"
-        ></GameCard>
-      </v-row>
-    </div>
-  </v-container>
+  <section>
+    <v-container fluid>
+      <div v-if="loading">Loading...</div>
+      <div v-if="!loading">
+        <v-row>
+          <v-col cols="12">
+            <h1 class="mb-4">
+              Game "{{ state.name }}"
+              <v-btn
+                v-clipboard:copy="gameUrl"
+                v-clipboard:success="onCopy"
+                v-clipboard:error="onError"
+              >
+                <font-awesome-icon icon="copy" class="mr-2"></font-awesome-icon>
+                Copy Link
+              </v-btn>
+            </h1>
+          </v-col>
+        </v-row>
+        <v-row>
+          <template>
+            <v-progress-linear value="15"></v-progress-linear>
+            <div class="center">Time left: 00:15</div>
+          </template>
+        </v-row>
+        <v-row>
+          <v-col cols="12" md="8" lg="9">
+            <v-row>
+              <GameCard v-if="blackCard" :card="blackCard"></GameCard>
+            </v-row>
+            <v-row>
+              <GameCard
+                v-for="card in whiteCards"
+                :key="card.id"
+                :card="card"
+              ></GameCard>
+            </v-row>
+          </v-col>
+          <v-col cols="12" md="4" lg="3">
+            <v-card outlined>
+              <v-card-title>Chat</v-card-title>
+              <v-card-text>
+                <v-skeleton-loader
+                  v-for="i in 6"
+                  :key="i"
+                  type="list-item-three-line"
+                ></v-skeleton-loader>
+              </v-card-text>
+              <v-divider class="mx-4"></v-divider>
+
+              <v-card-actions class="mb-1">
+                <v-text-field
+                  class="mx-2"
+                  filled
+                  dense
+                  hide-details
+                  placeholder="Enter your message"
+                  append-icon="mdi-send"
+                ></v-text-field>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+    </v-container>
+  </section>
 </template>
 
 <script lang="ts">
@@ -42,6 +85,11 @@ export default Vue.extend({
       whiteCards: [],
       playerId: '7f660100-9b29-4d43-b2dc-85fa606c7123',
     }
+  },
+  computed: {
+    gameUrl(): string {
+      return `${process.env.baseUrl}/game/${this.state?.id}`
+    },
   },
   mounted(): void {
     this.gameSocket = this.$nuxtSocket({
@@ -83,6 +131,12 @@ export default Vue.extend({
       )
 
       console.log('whiteCards', this.whiteCards)
+    },
+    onCopy(e: any) {
+      alert('Game URL: ' + e.text + ' copied!')
+    },
+    onError(e: string) {
+      alert('Failed to copy texts!' + e)
     },
   },
 })
