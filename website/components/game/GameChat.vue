@@ -115,19 +115,28 @@ export default Vue.extend({
         return `${message} ${chat.content}`
       }
 
-      const player = this.resolvePerson(chat.personId)
+      if (chat.personId) {
+        const player = this.resolvePerson(chat.personId)
 
-      if (chat.type === GameChatType.GAME && chat.personId) {
-        return `${message} ${player.name}
+        if (!player) {
+          console.log("Player couldn't be resolved!")
+          return ''
+        }
+
+        if (chat.type === GameChatType.GAME && chat.personId) {
+          return `${message} ${player.name}
         } has joined the game!`
+        }
+
+        if (chat.type === GameChatType.PLAYER && chat.personId) {
+          const tag = player.isHost
+            ? '<span class="red--text">[HOST]</span> '
+            : ''
+          return `${message} ${tag}<b>${player.name}:</b> ${chat.content}`
+        }
       }
 
-      if (chat.type === GameChatType.PLAYER && chat.personId) {
-        const tag = player.isHost
-          ? '<span class="red--text">[HOST]</span> '
-          : ''
-        return `${message} ${tag}<b>${player.name}:</b> ${chat.content}`
-      }
+      return ''
     },
     timeFormatter(time: string) {
       return format(parseInt(time) * 1000, 'H:m:ss')

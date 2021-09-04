@@ -7,6 +7,7 @@ import { GameService } from './game.service';
 import { CreateGameDto } from './dto/create-game.dto';
 import { UpdateGameDto } from './dto/update-game.dto';
 import { GameInterface } from '../../../interfaces/GameInterface';
+import { GameTypes } from '../../../constants/GameTypes';
 
 @WebSocketGateway({
   namespace: 'game',
@@ -21,9 +22,9 @@ export class GameGateway {
   }
 
   @SubscribeMessage('findAllGame')
-  findAll(): GameInterface[] {
+  findAll(@MessageBody() gameTypes?: GameTypes[]): GameInterface[] {
     console.log('findAllGame');
-    return this.gameService.findAll();
+    return this.gameService.findAll(gameTypes);
   }
 
   @SubscribeMessage('findOneGame')
