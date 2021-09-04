@@ -6,12 +6,27 @@
         <h1>Open Games</h1>
       </v-row>
       <v-row>
-        <v-col cols="12" md="3"> Filters </v-col>
+        <v-col cols="12" md="3">
+          <v-card>
+            <v-card-title>Filters</v-card-title>
+            <v-card-text>
+              <v-select
+                v-model="selectedStatuses"
+                :items="items"
+                attach
+                chips
+                label="Status"
+                multiple
+                @change="getGamesFromStatus"
+              ></v-select>
+            </v-card-text>
+          </v-card>
+        </v-col>
         <v-col cols="12" md="9">
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
-            label="Search"
+            label="Search for game name or host"
             single-line
             hide-details
           ></v-text-field>
@@ -63,17 +78,16 @@
                     }}
                   </v-chip>
                 </template>
-                <p class="my-0 py-0">{{ item.people.host.name }} (host)</p>
                 <p v-for="player in item.people.players" class="my-0 py-0">
-                  {{ player.name }}
+                  <span v-if="player.isHost">[HOST] </span>{{ player.name }}
                 </p>
               </v-tooltip>
             </template>
             <template #item.status="{ item }">
-              {{ item.status | capitalize }}
+              {{ getGameStatus(item.status) }}
             </template>
             <template #item.options.gameType="{ item }">
-              {{ item.options.gameType | capitalize }}
+              {{ getGameType(item.options.gameType) }}
             </template>
             <template #item.actions="{ item }">
               <NuxtLink
@@ -99,14 +113,25 @@ import Vue from 'vue'
 // eslint-disable-next-line import/named
 import { NuxtSocket } from 'nuxt-socket-io'
 import { GameInterface } from '../../../interfaces/GameInterface'
+import { GameTypes, GameTypesFriendly } from '../../../constants/GameTypes'
+import {
+  GameStatus,
+  GameStatusFriendly,
+  GameStatusSelect,
+  GameStatusTranslate,
+} from '../../../constants/GameStatus'
 
 export default Vue.extend({
   data() {
     return {
       gameSocket: null as NuxtSocket | null,
       search: '',
-      loading: false,
+      loading: true,
       games: [] as GameInterface[],
+      items: GameStatusSelect.items,
+      value: GameStatusSelect.value,
+      selectedStatuses: [],
+      translatedStatuses: [] as GameStatus[],
       headers: [
         {
           text: '',
@@ -161,10 +186,28 @@ export default Vue.extend({
   },
   methods: {
     getGames() {
-      this.gameSocket?.emit('findAllGame', (res: GameInterface[]) => {
-        console.log('got list of games', res)
-        this.games = res
-      })
+      this.gameSocket?.emit(
+        'findAllGame',
+        this.translatedStatuses,
+        (res: GameInterface[]) => {
+          this.games = res
+          this.loading = false
+        }
+      )
+    },
+    getGamesFromStatus(status: string[]) {
+      const translatedStatuses = []
+      for (const key in status) {
+        translatedStatuses.push(GameStatusTranslate[status[key]])
+      }
+      this.translatedStatuses = translatedStatuses
+      this.getGames()
+    },
+    getGameStatus(status: GameStatus) {
+      return GameStatusFriendly[status]
+    },
+    getGameType(type: GameTypes) {
+      return GameTypesFriendly[type]
     },
   },
 })

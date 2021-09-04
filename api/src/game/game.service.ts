@@ -11,8 +11,26 @@ export class GameService {
     return 'This action adds a new game';
   }
 
-  findAll(): GameInterface[] {
-    return [this.game, this.game];
+  findAll(gameTypes?: GameTypes[]): GameInterface[] {
+    console.log('gameTypes', gameTypes);
+    const data = [];
+    const dupGame = {
+      ...this.game,
+      ...{
+        id: 'foobar2',
+        name: 'Pigs DO fly!',
+        status: GameStatus.SETTING_UP,
+        'people.host.name': 'Some Guy',
+      },
+    };
+
+    if (gameTypes.length > 0) {
+      data.push(this.game);
+    } else {
+      data.push(this.game, dupGame);
+    }
+
+    return data;
   }
 
   findOne(id: string): GameInterface {
@@ -35,6 +53,10 @@ export class GameService {
     validToJoin: true,
     roundCount: 1,
     people: {
+      host: {
+        id: '7f660100-9b29-4d43-b2dc-85fa606c7123',
+        name: 'Maelstromeous',
+      },
       players: [
         {
           id: '7f660100-9b29-4d43-b2dc-85fa606c7123',
