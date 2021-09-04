@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" width="500">
       <template #activator="{ on, attrs }">
         <v-chip
-          color="indigo"
+          color="blue"
           text-color="white"
           class="mr-2"
           v-bind="attrs"
