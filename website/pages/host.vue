@@ -3,8 +3,8 @@
     <v-container>
       <v-row>
         <v-col cols="12" class="text-center">
-          <h1 v-show="!name">Host Game</h1>
-          <h1 v-show="name">Create game "{{ name }}"</h1>
+          <h1 v-show="!name">Create Game</h1>
+          <h1 v-show="name">Create Game "{{ name }}"</h1>
           <v-btn
             v-if="isSettingUp"
             color="primary"
