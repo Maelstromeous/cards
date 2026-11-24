@@ -83,7 +83,7 @@ To run the full app locally, start the API (`api/`, `pnpm start:dev`) and the we
 
 ## Node version
 
-CI runs on **Node 24 LTS**, read from `.nvmrc` at the repo root, and the API declares `engines.node >= 24`. On Node 17 or newer, the Nuxt 2 (webpack 4) build fails with an OpenSSL error, so prefix website builds and dev runs with `NODE_OPTIONS=--openssl-legacy-provider`.
+CI runs on **Node 26 LTS**, read from `.nvmrc` at the repo root, and the API declares `engines.node >= 26`. On Node 17 or newer, the Nuxt 2 (webpack 4) build fails with an OpenSSL error, so prefix website builds and dev runs with `NODE_OPTIONS=--openssl-legacy-provider`.
 
 ## Code style
 
