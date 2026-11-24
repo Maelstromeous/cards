@@ -79,14 +79,14 @@ importers:
         specifier: ^7.22.0
         version: 7.32.0
       eslint-config-prettier:
-        specifier: ^8.1.0
-        version: 8.3.0(eslint@7.32.0)
+        specifier: ^10.1.8
+        version: 10.1.8(eslint@7.32.0)
       eslint-plugin-nuxt:
         specifier: ^2.0.0
         version: 2.0.0(eslint@7.32.0)
       eslint-plugin-prettier:
         specifier: ^3.3.1
-        version: 3.4.1(eslint-config-prettier@8.3.0(eslint@7.32.0))(eslint@7.32.0)(prettier@2.3.2)
+        version: 3.4.1(eslint-config-prettier@10.1.8(eslint@7.32.0))(eslint@7.32.0)(prettier@2.3.2)
       eslint-plugin-vue:
         specifier: ^7.7.0
         version: 7.17.0(eslint@7.32.0)
@@ -2592,8 +2592,8 @@ packages:
     engines: {node: '>=6.0'}
     hasBin: true
 
-  eslint-config-prettier@8.3.0:
-    resolution: {integrity: sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==}
+  eslint-config-prettier@10.1.8:
+    resolution: {integrity: sha512-82GZUjRS0p/jganf6q1rEO25VSoHH0hKPCTrgillPjdI/3bgBhAE1QzHrHTizjpRvy6pGAvKjDJtk2pF9NDq8w==}
     hasBin: true
     peerDependencies:
       eslint: '>=7.0.0'
@@ -7140,11 +7140,7 @@ snapshots:
       jest-runner: 26.6.3
       jest-runtime: 26.6.3
     transitivePeerDependencies:
-      - bufferutil
-      - canvas
       - supports-color
-      - ts-node
-      - utf-8-validate
 
   '@jest/transform@26.6.2':
     dependencies:
@@ -9692,7 +9688,7 @@ snapshots:
     optionalDependencies:
       source-map: 0.6.1
 
-  eslint-config-prettier@8.3.0(eslint@7.32.0):
+  eslint-config-prettier@10.1.8(eslint@7.32.0):
     dependencies:
       eslint: 7.32.0
 
@@ -9780,13 +9776,13 @@ snapshots:
       - eslint
       - supports-color
 
-  eslint-plugin-prettier@3.4.1(eslint-config-prettier@8.3.0(eslint@7.32.0))(eslint@7.32.0)(prettier@2.3.2):
+  eslint-plugin-prettier@3.4.1(eslint-config-prettier@10.1.8(eslint@7.32.0))(eslint@7.32.0)(prettier@2.3.2):
     dependencies:
       eslint: 7.32.0
       prettier: 2.3.2
       prettier-linter-helpers: 1.0.0
     optionalDependencies:
-      eslint-config-prettier: 8.3.0(eslint@7.32.0)
+      eslint-config-prettier: 10.1.8(eslint@7.32.0)
 
   eslint-plugin-promise@5.1.0(eslint@7.32.0):
     dependencies:
@@ -10965,7 +10961,11 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
