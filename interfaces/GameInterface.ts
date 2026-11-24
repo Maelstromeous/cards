@@ -1,7 +1,7 @@
-import {GameStatus} from "../constants/GameStatus";
-import {PersonInterface} from "./PersonInterface";
-import {GameTypes} from "../constants/GameTypes";
-import {CardInterface} from "./CardInterface";
+import {GameStatus} from "../constants/GameStatus.js";
+import {PersonInterface} from "./PersonInterface.js";
+import {GameTypes} from "../constants/GameTypes.js";
+import {CardInterface} from "./CardInterface.js";
 
 export interface GameInterface {
     id: string

@@ -1,4 +1,4 @@
-import { CardType } from '../constants/CardTypes'
+import { CardType } from '../constants/CardTypes.js'
 
 export interface CardInterface {
   id: string

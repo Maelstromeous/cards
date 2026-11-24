@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from './app.controller.js';
+import { AppService } from './app.service.js';
 import { ConfigModule } from '@nestjs/config';
-import { CardModule } from './card/card.module';
-import { GameModule } from './game/game.module';
-import { GamechatModule } from './gamechat/gamechat.module';
+import { CardModule } from './card/card.module.js';
+import { GameModule } from './game/game.module.js';
+import { GamechatModule } from './gamechat/gamechat.module.js';
 
 @Module({
   imports: [

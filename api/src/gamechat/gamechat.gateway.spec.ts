@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GamechatGateway } from './gamechat.gateway';
-import { GamechatService } from './gamechat.service';
+import { GamechatGateway } from './gamechat.gateway.js';
+import { GamechatService } from './gamechat.service.js';
 
 describe('GamechatGateway', () => {
   let gateway: GamechatGateway;

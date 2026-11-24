@@ -7,9 +7,9 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CardService } from './card.service';
-import { CreateCardDto } from './dto/create-card.dto';
-import { UpdateCardDto } from './dto/update-card.dto';
+import { CardService } from './card.service.js';
+import { CreateCardDto } from './dto/create-card.dto.js';
+import { UpdateCardDto } from './dto/update-card.dto.js';
 
 @Controller('card')
 export class CardController {
