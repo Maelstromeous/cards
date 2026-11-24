@@ -25,7 +25,7 @@ jobs:
       - name: Setup node env 🏗
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: .nvmrc
           cache: pnpm
           cache-dependency-path: |
             api/pnpm-lock.yaml
@@ -51,12 +51,12 @@ jobs:
         env:
           NODE_OPTIONS: --openssl-legacy-provider
 
-      # Both apps have existing lint errors, so lint reports without failing
-      # the build until those are cleaned up. The API lint runs without --fix.
+      # The API lint runs without --fix so CI never rewrites files.
       - name: Lint API 👀
-        continue-on-error: true
-        run: pnpm --filter api exec eslint "{src,apps,libs,test}/**/*.ts"
+        run: pnpm --filter api exec eslint "{src,test}/**/*.ts"
 
+      # The website has existing lint errors, so its lint reports without
+      # failing the build until the Nuxt 4 rebuild replaces it.
       - name: Lint website 👀
         continue-on-error: true
         run: pnpm --filter cards lint

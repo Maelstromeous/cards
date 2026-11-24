@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GameGateway } from './game.gateway';
-import { GameService } from './game.service';
+import { GameGateway } from './game.gateway.js';
+import { GameService } from './game.service.js';
 
 describe('GameGateway', () => {
   let gateway: GameGateway;

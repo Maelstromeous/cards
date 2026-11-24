@@ -3,11 +3,11 @@ import {
   SubscribeMessage,
   MessageBody,
 } from '@nestjs/websockets';
-import { GameService } from './game.service';
-import { CreateGameDto } from './dto/create-game.dto';
-import { UpdateGameDto } from './dto/update-game.dto';
-import { GameInterface } from '../../../interfaces/GameInterface';
-import { GameTypes } from '../../../constants/GameTypes';
+import { GameService } from './game.service.js';
+import { CreateGameDto } from './dto/create-game.dto.js';
+import { UpdateGameDto } from './dto/update-game.dto.js';
+import { GameInterface } from '../../../interfaces/GameInterface.js';
+import { GameTypes } from '../../../constants/GameTypes.js';
 
 @WebSocketGateway({
   namespace: 'game',

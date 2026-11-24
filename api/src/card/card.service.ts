@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCardDto } from './dto/create-card.dto';
-import { UpdateCardDto } from './dto/update-card.dto';
-import { CardType } from '../../../constants/CardTypes';
+import { CreateCardDto } from './dto/create-card.dto.js';
+import { UpdateCardDto } from './dto/update-card.dto.js';
+import { CardType } from '../../../constants/CardTypes.js';
 
 @Injectable()
 export class CardService {

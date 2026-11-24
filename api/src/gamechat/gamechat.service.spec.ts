@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { GamechatService } from './gamechat.service';
+import { GamechatService } from './gamechat.service.js';
 
 describe('GamechatService', () => {
   let service: GamechatService;

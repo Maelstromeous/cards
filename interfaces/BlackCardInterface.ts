@@ -1,4 +1,4 @@
-import {CardInterface} from "./CardInterface";
+import {CardInterface} from "./CardInterface.js";
 
 export interface BlackCardInterface extends CardInterface {
     pick: number

@@ -3,8 +3,8 @@ import {
   SubscribeMessage,
   MessageBody,
 } from '@nestjs/websockets';
-import { GamechatService } from './gamechat.service';
-import { CreateGamechatDto } from './dto/create-gamechat.dto';
+import { GamechatService } from './gamechat.service.js';
+import { CreateGamechatDto } from './dto/create-gamechat.dto.js';
 
 @WebSocketGateway({ cors: true, namespace: 'gamechat' })
 export class GamechatGateway {

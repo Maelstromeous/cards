@@ -10,11 +10,11 @@ The card text (in `cah-cards.json` and the mock data in `api/src/card/card.servi
 
 ## Layout
 
-The repository is a two-app [pnpm workspace](https://pnpm.io/workspaces). The root `package.json` only pins pnpm (`packageManager`) and holds no dependencies. `pnpm-workspace.yaml` lists `api/` and `website/`, and each app keeps its own `pnpm-lock.yaml` and `node_modules` (`sharedWorkspaceLockfile: false`), because the API (webpack 5) and the Nuxt 2 website (webpack 4) need clashing versions of the same build tools. Run app commands from inside `api/` or `website/`, or from the root with `pnpm --filter <name>` (the website's package name is `cards`).
+The repository is a two-app [pnpm workspace](https://pnpm.io/workspaces). The root `package.json` pins pnpm (`packageManager`), sets `"type": "module"` for the shared types, and holds no dependencies. `pnpm-workspace.yaml` lists `api/` and `website/`, and each app keeps its own `pnpm-lock.yaml` and `node_modules` (`sharedWorkspaceLockfile: false`), because the API (webpack 5) and the Nuxt 2 website (webpack 4) need clashing versions of the same build tools. Run app commands from inside `api/` or `website/`, or from the root with `pnpm --filter <name>` (the website's package name is `cards`).
 
 | Path | What it is |
 | --- | --- |
-| `api/` | NestJS 8 back end (TypeScript). REST controllers plus Socket.IO gateways. |
+| `api/` | NestJS 12 back end (TypeScript 6.0, native ES modules). REST controllers plus Socket.IO gateways. |
 | `website/` | Nuxt 2 front end (Vue 2, Vuetify 2, TypeScript via `@nuxt/typescript-build`). |
 | `interfaces/` | Shared TypeScript interfaces (`GameInterface`, `CardInterface`, and so on) used by both apps. |
 | `constants/` | Shared enums and lookup maps (`GameStatus`, `GameTypes`, `CardType`, `GameChatType`). |
@@ -23,9 +23,11 @@ The repository is a two-app [pnpm workspace](https://pnpm.io/workspaces). The ro
 
 ### Shared types
 
-`interfaces/` and `constants/` live at the repo root and are imported with relative paths from both apps, for example `import { GameInterface } from '../../../interfaces/GameInterface'`. There is no path alias or package for them. When you change a shared type, check both `api/` and `website/` for breakages.
+`interfaces/` and `constants/` live at the repo root and are imported with relative paths from both apps, for example `import { GameInterface } from '../../../interfaces/GameInterface.js'`. There is no path alias or package for them. The root `package.json` sets `"type": "module"` so these files compile as ES modules alongside the API, and relative imports inside them carry a `.js` extension (TypeScript resolves it to the `.ts` file). When you change a shared type, check both `api/` and `website/` for breakages.
 
-Because the API imports from outside `api/`, the TypeScript root becomes the repo root and `nest build` emits to `api/dist/api/src/main.js` (with `dist/interfaces` and `dist/constants` alongside). `nest-cli.json` sets `entryFile` to match. Keep that in mind before moving files or changing `tsconfig`.
+Because the API imports from outside `api/`, the TypeScript root becomes the repo root and `nest build` emits to `api/dist/api/src/main.js` (with `dist/interfaces` and `dist/constants` alongside). `nest-cli.json` sets `entryFile` to match, and `tsconfig.json` sets `rootDir` to `..`. Keep that in mind before moving files or changing `tsconfig`.
+
+The API is an ES module package (`"type": "module"`, `module: nodenext`), as NestJS 12 itself is ESM-only. Every relative import in `api/` needs an explicit `.js` extension, and `main.ts` uses top-level `await`.
 
 ### API (`api/src`)
 
@@ -60,11 +62,11 @@ Install dependencies for both apps with `pnpm install` at the repo root (lockfil
 | --- | --- |
 | Dev server with watch (port 3001) | `pnpm start:dev` |
 | Build | `pnpm build` |
-| Unit tests | `pnpm test` (Jest, `src/**/*.spec.ts`) |
+| Unit tests | `pnpm test` (Vitest, `src/**/*.spec.ts`) |
 | Single test file | `pnpm test src/game/game.service.spec.ts` |
-| End-to-end tests | `pnpm test:e2e` |
+| End-to-end tests | `pnpm test:e2e` (Vitest, `test/**/*.e2e-spec.ts`; boots the app and talks to it over HTTP and Socket.IO) |
 | Lint | `pnpm lint` (note: **runs `eslint --fix` and rewrites files**) |
-| Lint without changing files | `pnpm exec eslint "{src,apps,libs,test}/**/*.ts"` |
+| Lint without changing files | `pnpm exec eslint "{src,test}/**/*.ts"` |
 | Type check | `pnpm exec tsc --noEmit -p tsconfig.json` |
 | Format | `pnpm format` |
 
@@ -81,11 +83,11 @@ To run the full app locally, start the API (`api/`, `pnpm start:dev`) and the we
 
 ## Node version
 
-CI runs on **Node 22**. On Node 17 or newer, the Nuxt 2 (webpack 4) build fails with an OpenSSL error, so prefix website builds and dev runs with `NODE_OPTIONS=--openssl-legacy-provider`. The API builds and tests fine on current Node.
+CI runs on **Node 24 LTS**, read from `.nvmrc` at the repo root, and the API declares `engines.node >= 24`. On Node 17 or newer, the Nuxt 2 (webpack 4) build fails with an OpenSSL error, so prefix website builds and dev runs with `NODE_OPTIONS=--openssl-legacy-provider`.
 
 ## Code style
 
-- **API**: Prettier with single quotes and trailing commas (`api/.prettierrc`), semicolons on. ESLint uses `@typescript-eslint/recommended` plus Prettier. TypeScript is loose (`strictNullChecks` and `noImplicitAny` off).
+- **API**: Prettier with single quotes and trailing commas (`api/.prettierrc`), semicolons on. ESLint 10 flat config (`api/eslint.config.mjs`) uses `typescript-eslint` recommended plus Prettier 3; unused variables are warnings while the services are still stubs. TypeScript is loose (`strictNullChecks` and `noImplicitAny` off).
 - **Website**: Prettier with single quotes and **no semicolons** (`website/.prettierrc`). ESLint uses `@nuxtjs/eslint-config-typescript`, Nuxt, and Prettier. TypeScript `strict` is on. Two-space indent, LF line endings (`.editorconfig`).
 - Root `interfaces/` and `constants/` files are inconsistently formatted (some use double quotes and four-space indent). Match the style of the file you are editing; do not reformat them wholesale.
 - Name enums and interfaces as the existing files do: `XxxInterface`, singular or plural enum names as already established (`GameTypes`, `GameStatus`, `CardType`).
@@ -95,10 +97,9 @@ CI runs on **Node 22**. On Node 17 or newer, the Nuxt 2 (webpack 4) build fails 
 
 Worth knowing before trusting a red or green signal:
 
-- `.github/workflows/ci.yml` builds and tests the API, type checks it, and builds the website. Lint runs for both apps with `continue-on-error` because of the existing errors below, so a green CI run does not mean lint is clean. Website tests are not run because there are none.
-- `website/` lint currently reports existing errors (Prettier formatting and `vue/valid-v-slot` on Vuetify `v-slot:item.xxx` slots). `api/` lint has one Prettier error in `game.module.ts`.
-- `api/` `start:prod` points at `dist/api/main`, but the build emits `dist/api/src/main.js`.
-- The API's spec files and `test/app.e2e-spec.ts` are still the Nest CLI starter tests (each only checks that the provider is defined, or that `GET /` returns `Hello World!`). Passing tests say little about behaviour yet.
+- `.github/workflows/ci.yml` builds and tests the API, type checks it, and builds the website. API lint is blocking. Website lint runs with `continue-on-error` because of the existing errors below, so a green CI run does not mean website lint is clean. Website tests are not run because there are none.
+- `website/` lint currently reports existing errors (Prettier formatting and `vue/valid-v-slot` on Vuetify `v-slot:item.xxx` slots). `api/` lint has no errors and 9 unused-variable warnings in the stub services.
+- The API's unit spec files are still the Nest CLI starter tests (each only checks that the provider is defined). The e2e suite checks `GET /` and a `findAllGame` round trip on the `/game` gateway. Passing tests say little about behaviour yet.
 
 ## Working agreements
 
