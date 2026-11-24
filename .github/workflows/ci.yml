@@ -48,15 +48,16 @@ jobs:
 
       - name: Build website 🏗
         run: pnpm --filter cards build
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
+
+      - name: Type check website 🔎
+        run: pnpm --filter cards typecheck
 
       # The API lint runs without --fix so CI never rewrites files.
       - name: Lint API 👀
         run: pnpm --filter api exec eslint "{src,test}/**/*.ts"
 
-      # The website has existing lint errors, so its lint reports without
-      # failing the build until the Nuxt 4 rebuild replaces it.
       - name: Lint website 👀
-        continue-on-error: true
         run: pnpm --filter cards lint
+
+      - name: Check website formatting 👀
+        run: pnpm --filter cards exec prettier --check .
