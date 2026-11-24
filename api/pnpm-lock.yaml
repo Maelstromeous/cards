@@ -94,8 +94,8 @@ importers:
         specifier: ^10.0.0
         version: 10.2.1(@types/node@16.7.10)(typescript@4.4.2)
       tsconfig-paths:
-        specifier: ^3.10.1
-        version: 3.11.0
+        specifier: ^4.2.0
+        version: 4.2.0
       typescript:
         specifier: ^4.3.5
         version: 4.4.2
@@ -575,9 +575,6 @@ packages:
 
   '@types/json-schema@7.0.9':
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
-
-  '@types/json5@0.0.29':
-    resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
 
   '@types/mime@1.3.2':
     resolution: {integrity: sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==}
@@ -1907,12 +1904,13 @@ packages:
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
 
-  json5@1.0.1:
-    resolution: {integrity: sha512-aKS4WQjPenRxiQsC93MNfjx+nbF4PAdYzmd/1JIj8HYzqfbu86beTuNgXDzPknWk0n0uARlyewZo4s++ES36Ow==}
-    hasBin: true
-
   json5@2.2.0:
     resolution: {integrity: sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==}
+    engines: {node: '>=6'}
+    hasBin: true
+
+  json5@2.2.3:
+    resolution: {integrity: sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==}
     engines: {node: '>=6'}
     hasBin: true
 
@@ -2055,6 +2053,9 @@ packages:
 
   minimist@1.2.5:
     resolution: {integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==}
+
+  minimist@1.2.8:
+    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
   mkdirp@0.5.5:
     resolution: {integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==}
@@ -2713,8 +2714,9 @@ packages:
   tsconfig-paths@3.10.1:
     resolution: {integrity: sha512-rETidPDgCpltxF7MjBZlAFPUHv5aHH2MymyPvh+vEyWAED4Eb/WeMbsnD/JDr4OKPOA1TssDHgIcpTN5Kh0p6Q==}
 
-  tsconfig-paths@3.11.0:
-    resolution: {integrity: sha512-7ecdYDnIdmv639mmDwslG6KQg1Z9STTz1j7Gcz0xa+nshh/gKDAHcPxRbWOsA3SPp0tXP2leTcY9Kw+NAkfZzA==}
+  tsconfig-paths@4.2.0:
+    resolution: {integrity: sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==}
+    engines: {node: '>=6'}
 
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
@@ -3017,7 +3019,7 @@ snapshots:
       convert-source-map: 1.8.0
       debug: 4.3.2
       gensync: 1.0.0-beta.2
-      json5: 2.2.0
+      json5: 2.2.3
       semver: 6.3.0
       source-map: 0.5.7
     transitivePeerDependencies:
@@ -3660,8 +3662,6 @@ snapshots:
       pretty-format: 27.1.0
 
   '@types/json-schema@7.0.9': {}
-
-  '@types/json5@0.0.29': {}
 
   '@types/mime@1.3.2': {}
 
@@ -5347,13 +5347,11 @@ snapshots:
 
   json-stable-stringify-without-jsonify@1.0.1: {}
 
-  json5@1.0.1:
-    dependencies:
-      minimist: 1.2.5
-
   json5@2.2.0:
     dependencies:
-      minimist: 1.2.5
+      minimist: 1.2.8
+
+  json5@2.2.3: {}
 
   jsonc-parser@3.0.0: {}
 
@@ -5465,9 +5463,11 @@ snapshots:
 
   minimist@1.2.5: {}
 
+  minimist@1.2.8: {}
+
   mkdirp@0.5.5:
     dependencies:
-      minimist: 1.2.5
+      minimist: 1.2.8
 
   ms@2.0.0: {}
 
@@ -6128,19 +6128,18 @@ snapshots:
     dependencies:
       chalk: 4.1.2
       enhanced-resolve: 5.8.2
-      tsconfig-paths: 3.11.0
+      tsconfig-paths: 3.10.1
 
   tsconfig-paths@3.10.1:
     dependencies:
-      json5: 2.2.0
-      minimist: 1.2.5
+      json5: 2.2.3
+      minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsconfig-paths@3.11.0:
+  tsconfig-paths@4.2.0:
     dependencies:
-      '@types/json5': 0.0.29
-      json5: 1.0.1
-      minimist: 1.2.5
+      json5: 2.2.3
+      minimist: 1.2.8
       strip-bom: 3.0.0
 
   tslib@1.14.1: {}
