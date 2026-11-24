@@ -52,6 +52,9 @@ jobs:
       - name: Type check website 🔎
         run: pnpm --filter cards typecheck
 
+      - name: Test website 🧪
+        run: pnpm --filter cards test
+
       # The API lint runs without --fix so CI never rewrites files.
       - name: Lint API 👀
         run: pnpm --filter api exec eslint "{src,test}/**/*.ts"

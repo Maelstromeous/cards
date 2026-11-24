@@ -85,7 +85,7 @@ Install dependencies for both apps with `pnpm install` at the repo root (lockfil
 | Type check | `pnpm typecheck` (`nuxt typecheck`, using `vue-tsc`) |
 | Lint | `pnpm lint` (ESLint via `@nuxt/eslint`, no auto-fix) |
 | Format | `pnpm format` (Prettier; CI runs `prettier --check .`) |
-| Tests | None yet; Vitest with `@nuxt/test-utils` is the next planned step |
+| Tests | `pnpm test` (Vitest with `@nuxt/test-utils` in the `nuxt` environment and happy-dom, `test/nuxt/**/*.spec.ts`) |
 
 To run the full app locally, start the API (`api/`, `pnpm start:dev`) and the website (`website/`, `pnpm dev`) in two terminals, then open `http://localhost:3000`.
 
@@ -105,10 +105,11 @@ CI runs on **Node 26 LTS**, read from `.nvmrc` at the repo root, and both apps d
 
 Worth knowing before trusting a red or green signal:
 
-- `.github/workflows/ci.yml` builds, type checks, and lints both apps, runs the API's unit and e2e tests, and checks website formatting. Every step is blocking. Website tests are not run because there are none yet.
+- `.github/workflows/ci.yml` builds, type checks, lints, and tests both apps (API unit and e2e tests, website component tests), and checks website formatting. Every step is blocking.
 - `website/` lint is clean. `api/` lint has no errors and 9 unused-variable warnings in the stub services.
 - The website's game page, host page, and chat still use mock data and stubs from the prototype (a hard-coded player id, a fake "start game" delay, a hard-coded pack list, and a chat box that does not send). They are marked with `TODO` comments.
-- The API's unit spec files are still the Nest CLI starter tests (each only checks that the provider is defined). The e2e suite checks `GET /` and a `findAllGame` round trip on the `/game` gateway. Passing tests say little about behaviour yet.
+- The API serves mock data, so its tests pin down that mock behaviour (which cards, games, and chat lines come back, and that controllers and gateways delegate to their services). The e2e suite boots the app and checks the card endpoints and the `/game` and `/gamechat` socket messages. Expect to rewrite these tests when real game logic arrives.
+- Website tests live in `test/nuxt/` so that `nuxt typecheck` covers them. They mock `socket.io-client` with `vi.mock` rather than talking to a running API.
 
 ## Working agreements
 
