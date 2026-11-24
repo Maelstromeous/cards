@@ -19,7 +19,7 @@
     "nuxt": "^2.15.3",
     "nuxt-clipboard": "^0.0.6",
     "nuxt-socket-io": "^1.1.23",
-    "unique-names-generator": "^4.6.0",
+    "unique-names-generator": "^4.7.1",
     "vue-uuid": "^2.0.2"
   },
   "devDependencies": {
