@@ -7,3 +7,6 @@
 
 # Claude Code (personal overrides)
 .claude/settings.local.json
+
+# Dependencies
+node_modules

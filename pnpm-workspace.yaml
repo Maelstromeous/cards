@@ -1,0 +1,24 @@
+packages:
+  - api
+  - website
+
+# Nuxt 2 and its loaders import packages they do not declare (for example
+# `vue`), so they need a flat, npm-style node_modules to resolve them.
+shamefullyHoist: true
+
+# The API (webpack 5 via @nestjs/cli) and the website (webpack 4 via Nuxt 2)
+# need incompatible versions of the same tools, so each app keeps its own
+# lockfile and node_modules rather than sharing one hoisted tree.
+sharedWorkspaceLockfile: false
+
+# None of these install scripts are needed: most only print funding or
+# telemetry notices, and deasync (pulled in by vue-jest) is a native add-on
+# that the website does not use yet.
+ignoredBuiltDependencies:
+  - '@fortawesome/fontawesome-common-types'
+  - '@fortawesome/fontawesome-svg-core'
+  - '@fortawesome/free-solid-svg-icons'
+  - '@nestjs/core'
+  - core-js
+  - deasync
+  - nuxt

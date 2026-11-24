@@ -10,7 +10,7 @@ The card text (in `cah-cards.json` and the mock data in `api/src/card/card.servi
 
 ## Layout
 
-The repository is a two-app monorepo with **no root `package.json`**. Each app has its own `package.json`, `yarn.lock`, and `node_modules`, so run commands from inside `api/` or `website/`.
+The repository is a two-app [pnpm workspace](https://pnpm.io/workspaces). The root `package.json` only pins pnpm (`packageManager`) and holds no dependencies. `pnpm-workspace.yaml` lists `api/` and `website/`, and each app keeps its own `pnpm-lock.yaml` and `node_modules` (`sharedWorkspaceLockfile: false`), because the API (webpack 5) and the Nuxt 2 website (webpack 4) need clashing versions of the same build tools. Run app commands from inside `api/` or `website/`, or from the root with `pnpm --filter <name>` (the website's package name is `cards`).
 
 | Path | What it is |
 | --- | --- |
@@ -49,36 +49,39 @@ Config comes from `@nestjs/config`, loading `api/.development.env` (`PORT=3001`)
 
 ## Commands
 
-Install dependencies in each app with `yarn install` (Yarn 1, lockfiles are committed; use Yarn, not npm).
+Install dependencies for both apps with `pnpm install` at the repo root (lockfiles are committed; use pnpm, not npm or Yarn). Enable the pinned version with `corepack enable`. Workspace settings live in `pnpm-workspace.yaml`:
+
+- `shamefullyHoist: true` gives each app a flat `node_modules`, which Nuxt 2 needs because it imports packages it does not declare (such as `vue`).
+- `ignoredBuiltDependencies` lists packages whose install scripts are skipped (funding notices and the unused `deasync` add-on). If you add a dependency that genuinely needs its install script, add it to `onlyBuiltDependencies` instead.
 
 ### API (run in `api/`)
 
 | Task | Command |
 | --- | --- |
-| Dev server with watch (port 3001) | `yarn start:dev` |
-| Build | `yarn build` |
-| Unit tests | `yarn test` (Jest, `src/**/*.spec.ts`) |
-| Single test file | `yarn test src/game/game.service.spec.ts` |
-| End-to-end tests | `yarn test:e2e` |
-| Lint | `yarn lint` (note: **runs `eslint --fix` and rewrites files**) |
-| Lint without changing files | `npx eslint "{src,apps,libs,test}/**/*.ts"` |
-| Type check | `npx tsc --noEmit -p tsconfig.json` |
-| Format | `yarn format` |
+| Dev server with watch (port 3001) | `pnpm start:dev` |
+| Build | `pnpm build` |
+| Unit tests | `pnpm test` (Jest, `src/**/*.spec.ts`) |
+| Single test file | `pnpm test src/game/game.service.spec.ts` |
+| End-to-end tests | `pnpm test:e2e` |
+| Lint | `pnpm lint` (note: **runs `eslint --fix` and rewrites files**) |
+| Lint without changing files | `pnpm exec eslint "{src,apps,libs,test}/**/*.ts"` |
+| Type check | `pnpm exec tsc --noEmit -p tsconfig.json` |
+| Format | `pnpm format` |
 
 ### Website (run in `website/`)
 
 | Task | Command |
 | --- | --- |
-| Dev server with hot reload (port 3000) | `yarn dev` |
-| Production build | `yarn build` then `yarn start` |
-| Lint | `yarn lint` (ESLint over `.js` and `.vue`, no auto-fix) |
-| Tests | `yarn test` (Jest, but there are no website tests yet, so it exits non-zero) |
+| Dev server with hot reload (port 3000) | `pnpm dev` |
+| Production build | `pnpm build` then `pnpm start` |
+| Lint | `pnpm lint` (ESLint over `.js` and `.vue`, no auto-fix) |
+| Tests | `pnpm test` (Jest, but there are no website tests yet, so it exits non-zero) |
 
-To run the full app locally, start the API (`api/`, `yarn start:dev`) and the website (`website/`, `yarn dev`) in two terminals, then open `http://localhost:3000`.
+To run the full app locally, start the API (`api/`, `pnpm start:dev`) and the website (`website/`, `pnpm dev`) in two terminals, then open `http://localhost:3000`.
 
 ## Node version
 
-CI targets **Node 14**. On Node 17 or newer, the Nuxt 2 (webpack 4) build fails with an OpenSSL error, so prefix website builds and dev runs with `NODE_OPTIONS=--openssl-legacy-provider`. The API builds and tests fine on current Node.
+CI runs on **Node 22**. On Node 17 or newer, the Nuxt 2 (webpack 4) build fails with an OpenSSL error, so prefix website builds and dev runs with `NODE_OPTIONS=--openssl-legacy-provider`. The API builds and tests fine on current Node.
 
 ## Code style
 
@@ -92,7 +95,7 @@ CI targets **Node 14**. On Node 17 or newer, the Nuxt 2 (webpack 4) build fails 
 
 Worth knowing before trusting a red or green signal:
 
-- `.github/workflows/ci.yml` runs `yarn`, `yarn lint`, and `yarn test` at the repo root, where there is no `package.json`, so CI does not exercise either app.
+- `.github/workflows/ci.yml` builds and tests the API, type checks it, and builds the website. Lint runs for both apps with `continue-on-error` because of the existing errors below, so a green CI run does not mean lint is clean. Website tests are not run because there are none.
 - `website/` lint currently reports existing errors (Prettier formatting and `vue/valid-v-slot` on Vuetify `v-slot:item.xxx` slots). `api/` lint has one Prettier error in `game.module.ts`.
 - `api/` `start:prod` points at `dist/api/main`, but the build emits `dist/api/src/main.js`.
 - The API's spec files and `test/app.e2e-spec.ts` are still the Nest CLI starter tests (each only checks that the provider is defined, or that `GET /` returns `Hello World!`). Passing tests say little about behaviour yet.
