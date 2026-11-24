@@ -1,5 +1,5 @@
-import {GameChatType} from "../constants/GameChatType.js";
-import {PersonInterface} from "./PersonInterface.js";
+import type { GameChatType } from "../constants/GameChatType.js";
+import type { PersonInterface } from "./PersonInterface.js";
 
 export interface GameChatInterface {
     id: string

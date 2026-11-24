@@ -1,4 +1,4 @@
-import {CardInterface} from "./CardInterface.js";
+import type { CardInterface } from "./CardInterface.js";
 
 export interface PersonInterface {
     id: string
