@@ -4,3 +4,6 @@
 
 # IDEs
 .idea
+
+# Claude Code (personal overrides)
+.claude/settings.local.json
