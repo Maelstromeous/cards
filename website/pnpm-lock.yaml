@@ -24,8 +24,8 @@ importers:
         specifier: ^2.15.3
         version: 2.15.8(babel-core@7.0.0-bridge.0(@babel/core@7.15.0))(consola@2.15.3)(typescript@4.2.4)
       nuxt-clipboard:
-        specifier: ^0.0.6
-        version: 0.0.6
+        specifier: ^0.0.7
+        version: 0.0.7
       nuxt-socket-io:
         specifier: ^1.1.23
         version: 1.1.23(sass@1.32.13)(webpack@4.46.0)
@@ -1846,8 +1846,8 @@ packages:
     resolution: {integrity: sha512-FxqpkPPwu1HjuN93Omfm4h8uIanXofW0RxVEW3k5RKx+mJJYSthzNhp32Kzxxy3YAEZ/Dc/EWN1vZRY0+kOhbw==}
     engines: {node: '>= 10'}
 
-  clipboard@2.0.8:
-    resolution: {integrity: sha512-Y6WO0unAIQp5bLmk1zdThRhgJt/x3ks6f30s3oE3H1mgIEU33XyQjEf8gsf6DxC7NPX8Y1SsNWjUjL/ywLnnbQ==}
+  clipboard@2.0.11:
+    resolution: {integrity: sha512-C+0bbOqkezLIsmWSvlsXS0Q0bmkugu7jcfMIACB+RDEntIzQIkdr148we28AfSloQLRdZlYL/QYyrq05j/3Faw==}
 
   cliui@6.0.0:
     resolution: {integrity: sha512-t6wbgtoCXvAzst7QgXxJYqPt0usEfbgQdftEPbLL/cvv6HPE5VgvqCuAIDR0NgU52ds6rFwqrgakNLrHEjCbrQ==}
@@ -4213,8 +4213,8 @@ packages:
   num2fraction@1.2.2:
     resolution: {integrity: sha512-Y1wZESM7VUThYY+4W+X4ySH2maqcA+p7UR+w8VWNWVAd6lwuXXWz/w/Cz43J/dI2I+PS6wD5N+bJUF+gjWvIqg==}
 
-  nuxt-clipboard@0.0.6:
-    resolution: {integrity: sha512-KlfBWhQMVh9qcZGE7I0B0lhxYrcgrDwSXBtWCQIJKPOLQYEmZm3uJj8EDdLKXhpXfo8PeylaEo/6eL0u0wkgYQ==}
+  nuxt-clipboard@0.0.7:
+    resolution: {integrity: sha512-ra7h7kvJ4YrSDCPxwdtNP5hwX7H6lqpHwoUzQlXgGoDPhSvDzzj7rYUFX4IEYJqZUwcAOT5di5jz8OqQ+/t25w==}
 
   nuxt-socket-io@1.1.23:
     resolution: {integrity: sha512-ItYiwOE1FFRw9mvq1VrDeoH1VZkhbOSNkOp9gGSnxCZZDJ9KTbitpGL3TPr2DkCCc997gJEENKz/PvEQExtx2g==}
@@ -5937,8 +5937,8 @@ packages:
   vue-client-only@2.1.0:
     resolution: {integrity: sha512-vKl1skEKn8EK9f8P2ZzhRnuaRHLHrlt1sbRmazlvsx6EiC3A8oWF8YCBrMJzoN+W3OnElwIGbVjsx6/xelY1AA==}
 
-  vue-clipboard2@0.3.1:
-    resolution: {integrity: sha512-H5S/agEDj0kXjUb5GP2c0hCzIXWRBygaWLN3NEFsaI9I3uWin778SFEMt8QRXiPG+7anyjqWiw2lqcxWUSfkYg==}
+  vue-clipboard2@0.3.3:
+    resolution: {integrity: sha512-aNWXIL2DKgJyY/1OOeITwAQz1fHaCIGvUFHf9h8UcoQBG5a74MkdhS/xqoYe7DNZdQmZRL+TAdIbtUs9OyVjbw==}
 
   vue-eslint-parser@7.10.0:
     resolution: {integrity: sha512-7tc/ewS9Vq9Bn741pvpg8op2fWJPH3k32aL+jcIcWGCTzh/zXSdh7pZ5FV3W2aJancP9+ftPAv292zY5T5IPCg==}
@@ -7140,11 +7140,7 @@ snapshots:
       jest-runner: 26.6.3
       jest-runtime: 26.6.3
     transitivePeerDependencies:
-      - bufferutil
-      - canvas
       - supports-color
-      - ts-node
-      - utf-8-validate
 
   '@jest/transform@26.6.2':
     dependencies:
@@ -9005,7 +9001,7 @@ snapshots:
 
   cli-width@3.0.0: {}
 
-  clipboard@2.0.8:
+  clipboard@2.0.11:
     dependencies:
       good-listener: 1.2.2
       select: 1.1.2
@@ -10965,7 +10961,11 @@ snapshots:
       pretty-format: 26.6.2
       throat: 5.0.0
     transitivePeerDependencies:
+      - bufferutil
+      - canvas
       - supports-color
+      - ts-node
+      - utf-8-validate
 
   jest-leak-detector@26.6.2:
     dependencies:
@@ -11713,9 +11713,9 @@ snapshots:
 
   num2fraction@1.2.2: {}
 
-  nuxt-clipboard@0.0.6:
+  nuxt-clipboard@0.0.7:
     dependencies:
-      vue-clipboard2: 0.3.1
+      vue-clipboard2: 0.3.3
 
   nuxt-socket-io@1.1.23(sass@1.32.13)(webpack@4.46.0):
     dependencies:
@@ -13702,9 +13702,9 @@ snapshots:
 
   vue-client-only@2.1.0: {}
 
-  vue-clipboard2@0.3.1:
+  vue-clipboard2@0.3.3:
     dependencies:
-      clipboard: 2.0.8
+      clipboard: 2.0.11
 
   vue-eslint-parser@7.10.0(eslint@7.32.0):
     dependencies:

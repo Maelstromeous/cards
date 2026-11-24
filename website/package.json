@@ -17,7 +17,7 @@
     "date-fns": "^2.23.0",
     "date-fns-tz": "^1.1.6",
     "nuxt": "^2.15.3",
-    "nuxt-clipboard": "^0.0.6",
+    "nuxt-clipboard": "^0.0.7",
     "nuxt-socket-io": "^1.1.23",
     "unique-names-generator": "^4.6.0",
     "vue-uuid": "^2.0.2"
