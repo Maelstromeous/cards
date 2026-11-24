@@ -8,6 +8,12 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  // Dark by default; the header toggle still switches to light and remembers it.
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+  },
+
   // The shared types live at the repo root, outside this app. These aliases
   // give them stable import paths and are added to the generated tsconfig.
   alias: {

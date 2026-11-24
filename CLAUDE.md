@@ -50,7 +50,7 @@ Nuxt 4 layout, with the app source under `website/app/`:
 - `layouts/default.vue`, `app.vue`, `error.vue`, and `app.config.ts` (Nuxt UI colours).
 - REST calls use Nuxt's `$fetch` with `baseURL` set to `runtimeConfig.public.apiBase`. The API and site URLs default to `http://localhost:3001` and `http://localhost:3000`; override them with `NUXT_PUBLIC_API_BASE` and `NUXT_PUBLIC_SITE_URL`.
 - Components use `<script setup lang="ts">` and the Composition API, styled with Nuxt UI components (`UButton`, `UCard`, `UTable`, and so on) and Tailwind utility classes.
-- Dark mode is Nuxt UI's colour mode (`UColorModeButton`), stored by `@nuxtjs/color-mode`.
+- Dark mode is Nuxt UI's colour mode (`UColorModeButton`), stored by `@nuxtjs/color-mode`. The site defaults to dark (`colorMode.preference` in `nuxt.config.ts`); a visitor's toggle is remembered.
 - Icons are Lucide icons through Nuxt UI's icon support, written as `i-lucide-<name>` (for example `icon="i-lucide-lock"`). They are bundled from `@iconify-json/lucide`, so no registration is needed.
 - Data that only arrives over the socket in the browser (the games table) renders inside `<ClientOnly>` to avoid hydration mismatches.
 
