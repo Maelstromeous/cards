@@ -12,8 +12,8 @@ importers:
         specifier: ^8.0.0
         version: 8.0.6(class-transformer@0.4.0)(class-validator@0.13.2)(reflect-metadata@0.1.13)(rxjs@7.3.0)
       '@nestjs/config':
-        specifier: ^1.0.1
-        version: 1.0.1(@nestjs/common@8.0.6(class-transformer@0.4.0)(class-validator@0.13.2)(reflect-metadata@0.1.13)(rxjs@7.3.0))(reflect-metadata@0.1.13)(rxjs@7.3.0)
+        specifier: ^3.3.0
+        version: 3.3.0(@nestjs/common@8.0.6(class-transformer@0.4.0)(class-validator@0.13.2)(reflect-metadata@0.1.13)(rxjs@7.3.0))(rxjs@7.3.0)
       '@nestjs/core':
         specifier: ^8.0.0
         version: 8.0.6(@nestjs/common@8.0.6(class-transformer@0.4.0)(class-validator@0.13.2)(reflect-metadata@0.1.13)(rxjs@7.3.0))(@nestjs/platform-express@8.0.6)(@nestjs/websockets@8.0.6)(reflect-metadata@0.1.13)(rxjs@7.3.0)
@@ -399,12 +399,11 @@ packages:
       class-validator:
         optional: true
 
-  '@nestjs/config@1.0.1':
-    resolution: {integrity: sha512-azMl4uYlFIhYsywFxPJT81RxF3Pnn0TZW3EEmr0Wa0Wex8R2xpvBNrCcrOgW3TB1xGMP7eqBrlfsVh5ZP82szg==}
+  '@nestjs/config@3.3.0':
+    resolution: {integrity: sha512-pdGTp8m9d0ZCrjTpjkUbZx6gyf2IKf+7zlkrPNMsJzYZ4bFRRTpXrnj+556/5uiI6AfL5mMrJc2u7dB6bvM+VA==}
     peerDependencies:
-      '@nestjs/common': ^7.0.0 || ^8.0.0
-      reflect-metadata: ^0.1.13
-      rxjs: ^6.0.0 || ^7.2.0
+      '@nestjs/common': ^8.0.0 || ^9.0.0 || ^10.0.0
+      rxjs: ^7.1.0
 
   '@nestjs/core@8.0.6':
     resolution: {integrity: sha512-PIGL4TMjVkAsiv5hJinaTx3WdoftYh7pJDwIUQPvRZPLhboGbOJlVapN0Cw5SL7XgNWojQiAsbgLmnGJVDO3Sw==}
@@ -1199,12 +1198,13 @@ packages:
     engines: {node: '>=8'}
     deprecated: Use your platform's native DOMException instead
 
-  dotenv-expand@5.1.0:
-    resolution: {integrity: sha512-YXQl1DSa4/PQyRfgrv6aoNjhasp/p4qs9FjJ4q4cQk+8m4r6k4ZSiEyytKG8f8W9gi8WsQtIObNmKd+tMzNTmA==}
+  dotenv-expand@10.0.0:
+    resolution: {integrity: sha512-GopVGCpVS1UKH75VKHGuQFqS1Gusej0z4FyQkPdwjil2gNIv+LNsqBlboOzpJFZKVT95GkCyWJbBSdFEFUWI2A==}
+    engines: {node: '>=12'}
 
-  dotenv@10.0.0:
-    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
-    engines: {node: '>=10'}
+  dotenv@16.4.5:
+    resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
+    engines: {node: '>=12'}
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -1955,18 +1955,8 @@ packages:
   lodash.clonedeep@4.5.0:
     resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
 
-  lodash.get@4.4.2:
-    resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
-    deprecated: This package is deprecated. Use the optional chaining (?.) operator instead.
-
-  lodash.has@4.5.2:
-    resolution: {integrity: sha512-rnYUdIo6xRCJnQmbVFEwcxF144erlD+M3YcJUVesflU9paQaE8p+fJDcIQrlMYbxoANFL+AB9hZrzSBBk5PL+g==}
-
   lodash.merge@4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
-
-  lodash.set@4.3.2:
-    resolution: {integrity: sha512-4hNPN5jlm/N/HLMCO43v8BXKq9Z7QdAGc/VGrRD61w8gN9g/6jF9A4L1pbUgBLCffi0w9VsXfTOij5x8iTyFvg==}
 
   lodash.toarray@4.4.0:
     resolution: {integrity: sha512-QyffEA3i5dma5q2490+SgCvDN0pXLmRGSyAANuVi0HQ01Pkfr9fuoKQW8wm1wGBnJITs/mS7wQvS6VshUEBFCw==}
@@ -1976,6 +1966,9 @@ packages:
 
   lodash@4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
 
   log-symbols@4.1.0:
     resolution: {integrity: sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==}
@@ -3443,17 +3436,13 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@nestjs/config@1.0.1(@nestjs/common@8.0.6(class-transformer@0.4.0)(class-validator@0.13.2)(reflect-metadata@0.1.13)(rxjs@7.3.0))(reflect-metadata@0.1.13)(rxjs@7.3.0)':
+  '@nestjs/config@3.3.0(@nestjs/common@8.0.6(class-transformer@0.4.0)(class-validator@0.13.2)(reflect-metadata@0.1.13)(rxjs@7.3.0))(rxjs@7.3.0)':
     dependencies:
       '@nestjs/common': 8.0.6(class-transformer@0.4.0)(class-validator@0.13.2)(reflect-metadata@0.1.13)(rxjs@7.3.0)
-      dotenv: 10.0.0
-      dotenv-expand: 5.1.0
-      lodash.get: 4.4.2
-      lodash.has: 4.5.2
-      lodash.set: 4.3.2
-      reflect-metadata: 0.1.13
+      dotenv: 16.4.5
+      dotenv-expand: 10.0.0
+      lodash: 4.17.21
       rxjs: 7.3.0
-      uuid: 8.3.2
 
   '@nestjs/core@8.0.6(@nestjs/common@8.0.6(class-transformer@0.4.0)(class-validator@0.13.2)(reflect-metadata@0.1.13)(rxjs@7.3.0))(@nestjs/platform-express@8.0.6)(@nestjs/websockets@8.0.6)(reflect-metadata@0.1.13)(rxjs@7.3.0)':
     dependencies:
@@ -4317,9 +4306,9 @@ snapshots:
     dependencies:
       webidl-conversions: 5.0.0
 
-  dotenv-expand@5.1.0: {}
+  dotenv-expand@10.0.0: {}
 
-  dotenv@10.0.0: {}
+  dotenv@16.4.5: {}
 
   ee-first@1.1.1: {}
 
@@ -4824,7 +4813,7 @@ snapshots:
       cli-width: 3.0.0
       external-editor: 3.1.0
       figures: 3.2.0
-      lodash: 4.17.21
+      lodash: 4.18.1
       mute-stream: 0.0.8
       run-async: 2.4.1
       rxjs: 6.6.7
@@ -4840,7 +4829,7 @@ snapshots:
       cli-width: 3.0.0
       external-editor: 3.1.0
       figures: 3.2.0
-      lodash: 4.17.21
+      lodash: 4.18.1
       mute-stream: 0.0.8
       ora: 5.4.1
       run-async: 2.4.1
@@ -5389,19 +5378,15 @@ snapshots:
 
   lodash.clonedeep@4.5.0: {}
 
-  lodash.get@4.4.2: {}
-
-  lodash.has@4.5.2: {}
-
   lodash.merge@4.6.2: {}
-
-  lodash.set@4.3.2: {}
 
   lodash.toarray@4.4.0: {}
 
   lodash.truncate@4.4.2: {}
 
   lodash@4.17.21: {}
+
+  lodash@4.18.1: {}
 
   log-symbols@4.1.0:
     dependencies:
@@ -6281,7 +6266,7 @@ snapshots:
 
   whatwg-url@8.7.0:
     dependencies:
-      lodash: 4.17.21
+      lodash: 4.18.1
       tr46: 2.1.0
       webidl-conversions: 6.1.0
 
