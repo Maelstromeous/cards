@@ -1,8 +1,11 @@
 version: 2
 updates:
 # Fetch and update latest `npm` packages
+# (covers pnpm: each app has its own pnpm-lock.yaml)
 - package-ecosystem: npm
-  directory: '/'
+  directories:
+    - '/api'
+    - '/website'
   schedule:
     interval: daily
     time: '00:00'

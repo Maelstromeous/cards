@@ -2,15 +2,16 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [
-      "Bash(yarn install*)",
-      "Bash(yarn test*)",
-      "Bash(yarn build*)",
-      "Bash(yarn lint*)",
-      "Bash(yarn format*)",
-      "Bash(npx tsc --noEmit*)",
-      "Bash(npx eslint*)",
-      "Bash(npx jest*)",
-      "Bash(NODE_OPTIONS=--openssl-legacy-provider yarn build*)"
+      "Bash(pnpm install*)",
+      "Bash(pnpm test*)",
+      "Bash(pnpm build*)",
+      "Bash(pnpm lint*)",
+      "Bash(pnpm format*)",
+      "Bash(pnpm exec tsc --noEmit*)",
+      "Bash(pnpm exec eslint*)",
+      "Bash(pnpm exec jest*)",
+      "Bash(pnpm --filter*)",
+      "Bash(NODE_OPTIONS=--openssl-legacy-provider pnpm build*)"
     ]
   }
 }
