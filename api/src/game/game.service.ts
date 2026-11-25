@@ -24,7 +24,7 @@ export class GameService {
       },
     };
 
-    if (gameTypes.length > 0) {
+    if (gameTypes?.length > 0) {
       data.push(this.game);
     } else {
       data.push(this.game, dupGame);
