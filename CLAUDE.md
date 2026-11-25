@@ -10,24 +10,26 @@ The card text (in `cah-cards.json` and the mock data in `api/src/card/card.servi
 
 ## Layout
 
-The repository is a two-app [pnpm workspace](https://pnpm.io/workspaces). The root `package.json` pins pnpm (`packageManager`), sets `"type": "module"` for the shared types, and holds no dependencies. `pnpm-workspace.yaml` lists `api/` and `website/`, and each app still keeps its own `pnpm-lock.yaml` and `node_modules` (`sharedWorkspaceLockfile: false`), a leftover from the Nuxt 2 website whose webpack 4 tooling clashed with the API's. Moving to one shared lockfile is the next planned step. Run app commands from inside `api/` or `website/`, or from the root with `pnpm --filter <name>` (the website's package name is `cards`).
+The repository is a [pnpm workspace](https://pnpm.io/workspaces) with two apps and one shared package, all locked by a single `pnpm-lock.yaml` at the root. The root `package.json` pins pnpm (`packageManager`), holds no dependencies, and has scripts that run across the workspace (`pnpm build`, `pnpm test`, `pnpm lint`, `pnpm typecheck`). Run app commands from inside `api/` or `website/`, or from the root with `pnpm --filter <name>` (package names are `api`, `cards` for the website, and `@humanity-deck/shared`).
 
 | Path | What it is |
 | --- | --- |
 | `api/` | NestJS 12 back end (TypeScript 6.0, native ES modules). REST controllers plus Socket.IO gateways. |
 | `website/` | Nuxt 4 front end (Vue 3, Nuxt UI 4 with Tailwind CSS 4, TypeScript 6.0). |
-| `interfaces/` | Shared TypeScript interfaces (`GameInterface`, `CardInterface`, and so on) used by both apps. |
-| `constants/` | Shared enums and lookup maps (`GameStatus`, `GameTypes`, `CardType`, `GameChatType`). |
+| `shared/` | The `@humanity-deck/shared` workspace package: interfaces (`GameInterface`, `CardInterface`, and so on) in `src/interfaces/`, and enums and lookup maps (`GameStatus`, `GameTypes`, `CardType`, `GameChatType`) in `src/constants/`. Used by both apps. |
 | `cah-cards.json` | Full card database (about 3 MB). Not yet wired in. Do not read it whole; use `grep` or `jq` on it. |
 | `designs/` | Wireframes (PNG exports and a Balsamiq `.bmpr` source). Useful reference for UI work. |
 
-### Shared types
+### Shared types (`shared/`)
 
-`interfaces/` and `constants/` live at the repo root and are shared by both apps. The API imports them with relative paths, for example `import { GameInterface } from '../../../interfaces/GameInterface.js'`. The website imports them through the `#interfaces` and `#constants` aliases set in `website/nuxt.config.ts`, for example `import type { GameInterface } from '#interfaces/GameInterface'`. Interfaces import each other with `import type`, because the website's TypeScript settings (`verbatimModuleSyntax`) require it. The root `package.json` sets `"type": "module"` so these files compile as ES modules alongside the API, and relative imports inside them carry a `.js` extension (TypeScript resolves it to the `.ts` file). When you change a shared type, check both `api/` and `website/` for breakages.
+Both apps depend on `@humanity-deck/shared` (`workspace:*`) and import from it by subpath, for example `import type { GameInterface } from '@humanity-deck/shared/interfaces/GameInterface'` or `import { GameStatus } from '@humanity-deck/shared/constants/GameStatus'`.
 
-Because the API imports from outside `api/`, the TypeScript root becomes the repo root and `nest build` emits to `api/dist/api/src/main.js` (with `dist/interfaces` and `dist/constants` alongside). `nest-cli.json` sets `entryFile` to match, and `tsconfig.json` sets `rootDir` to `..`. Keep that in mind before moving files or changing `tsconfig`.
+- The package is compiled with `tsc` to `shared/dist/` (ES modules plus `.d.ts` files), and its `exports` map points at `dist/`. Its `prepare` script builds it on every `pnpm install`, so a fresh clone works without an extra step.
+- **After editing anything in `shared/src/`, rebuild it** (`pnpm --filter @humanity-deck/shared build`), or run `pnpm --filter @humanity-deck/shared dev` to rebuild on change. The apps only see `dist/`.
+- Inside `shared/`, relative imports carry a `.js` extension, and interfaces import each other with `import type`.
+- When you change a shared type, check both `api/` and `website/` for breakages.
 
-The API is an ES module package (`"type": "module"`, `module: nodenext`), as NestJS 12 itself is ESM-only. Every relative import in `api/` needs an explicit `.js` extension, and `main.ts` uses top-level `await`.
+The API is an ES module package (`"type": "module"`, `module: nodenext`), as NestJS 12 itself is ESM-only. Every relative import in `api/` needs an explicit `.js` extension, and `main.ts` uses top-level `await`. `nest build` uses `tsconfig.build.json` (`rootDir: ./src`) and emits to `api/dist/main.js`.
 
 ### API (`api/src`)
 
@@ -56,11 +58,10 @@ Nuxt 4 layout, with the app source under `website/app/`:
 
 ## Commands
 
-Install dependencies for both apps with `pnpm install` at the repo root (lockfiles are committed; use pnpm, not npm or Yarn). Enable the pinned version with `corepack enable`. Workspace settings live in `pnpm-workspace.yaml`:
+Install dependencies for the whole workspace with `pnpm install` at the repo root (the lockfile is committed; use pnpm, not npm or Yarn). Enable the pinned version with `corepack enable`. Workspace settings live in `pnpm-workspace.yaml`:
 
-- `shamefullyHoist: true` gives each app a flat `node_modules`. The Nuxt 2 website needed it; it is due to be removed with the move to one lockfile.
 - `ignoredBuiltDependencies` lists packages whose install scripts are skipped (a funding notice, esbuild's binary check, and vue-demi's Vue 2 switch).
-- Installing runs the website's `postinstall` (`nuxt prepare`), which generates `website/.nuxt/` (types and the ESLint config) needed before lint and type check. If you add a dependency that genuinely needs its install script, add it to `onlyBuiltDependencies` instead.
+- Installing builds `shared/` (its `prepare` script) and runs the website's `postinstall` (`nuxt prepare`), which generates `website/.nuxt/` (types and the ESLint config) needed before lint and type check. If you add a dependency that genuinely needs its install script, add it to `onlyBuiltDependencies` instead.
 
 ### API (run in `api/`)
 
@@ -87,17 +88,17 @@ Install dependencies for both apps with `pnpm install` at the repo root (lockfil
 | Format | `pnpm format` (Prettier; CI runs `prettier --check .`) |
 | Tests | `pnpm test` (Vitest with `@nuxt/test-utils` in the `nuxt` environment and happy-dom, `test/nuxt/**/*.spec.ts`) |
 
-To run the full app locally, start the API (`api/`, `pnpm start:dev`) and the website (`website/`, `pnpm dev`) in two terminals, then open `http://localhost:3000`.
+To run the full app locally, start the API (`api/`, `pnpm start:dev`) and the website (`website/`, `pnpm dev`) in two terminals, then open `http://localhost:3000`. Add `pnpm --filter @humanity-deck/shared dev` in a third if you are changing shared types.
 
 ## Node version
 
-CI runs on **Node 26 LTS**, read from `.nvmrc` at the repo root, and both apps declare `engines.node >= 26`. No `NODE_OPTIONS` workaround is needed any more.
+CI runs on **Node 26 LTS**, read from `.nvmrc` at the repo root, and every package declares `engines.node >= 26`. No `NODE_OPTIONS` workaround is needed any more.
 
 ## Code style
 
 - **API**: Prettier with single quotes and trailing commas (`api/.prettierrc`), semicolons on. ESLint 10 flat config (`api/eslint.config.mjs`) uses `typescript-eslint` recommended plus Prettier 3; unused variables are warnings while the services are still stubs. TypeScript is loose (`strictNullChecks` and `noImplicitAny` off).
 - **Website**: Prettier with single quotes and **no semicolons** (`website/.prettierrc`). ESLint 10 flat config (`website/eslint.config.mjs`) extends the config `@nuxt/eslint` generates, with `eslint-config-prettier` on top. TypeScript `strict` is on (Nuxt's defaults). Two-space indent, LF line endings (`.editorconfig`).
-- Root `interfaces/` and `constants/` files are inconsistently formatted (some use double quotes and four-space indent). Match the style of the file you are editing; do not reformat them wholesale.
+- `shared/src/` files are inconsistently formatted (some use double quotes and four-space indent). Match the style of the file you are editing; do not reformat them wholesale.
 - Name enums and interfaces as the existing files do: `XxxInterface`, singular or plural enum names as already established (`GameTypes`, `GameStatus`, `CardType`).
 - New API features should follow the Nest CLI resource layout (module, service, controller or gateway, `dto/`, `entities/`, spec files).
 

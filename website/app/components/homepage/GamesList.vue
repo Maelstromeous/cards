@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
-import type { GameInterface } from '#interfaces/GameInterface'
-import { GameTypesFriendly } from '#constants/GameTypes'
-import { GameStatus, GameStatusFriendly } from '#constants/GameStatus'
+import type { GameInterface } from '@humanity-deck/shared/interfaces/GameInterface'
+import { GameTypesFriendly } from '@humanity-deck/shared/constants/GameTypes'
+import {
+  GameStatus,
+  GameStatusFriendly,
+} from '@humanity-deck/shared/constants/GameStatus'
 
 const games = ref<GameInterface[]>([])
 const loading = ref(true)

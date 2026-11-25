@@ -27,10 +27,9 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: pnpm
-          cache-dependency-path: |
-            api/pnpm-lock.yaml
-            website/pnpm-lock.yaml
 
+      # Installing also builds the shared types package (its `prepare`
+      # script) and runs `nuxt prepare` for the website.
       - name: Install dependencies 👨🏻‍💻
         run: pnpm install --frozen-lockfile
 

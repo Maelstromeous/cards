@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCardDto } from './dto/create-card.dto.js';
 import { UpdateCardDto } from './dto/update-card.dto.js';
-import { CardType } from '../../../constants/CardTypes.js';
+import { CardType } from '@humanity-deck/shared/constants/CardTypes';
 
 @Injectable()
 export class CardService {

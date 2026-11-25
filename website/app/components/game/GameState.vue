@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { GameInterface } from '#interfaces/GameInterface'
-import type { BlackCardInterface } from '#interfaces/BlackCardInterface'
-import type { CardInterface } from '#interfaces/CardInterface'
+import type { GameInterface } from '@humanity-deck/shared/interfaces/GameInterface'
+import type { BlackCardInterface } from '@humanity-deck/shared/interfaces/BlackCardInterface'
+import type { CardInterface } from '@humanity-deck/shared/interfaces/CardInterface'
 
 const props = defineProps<{ id: string }>()
 

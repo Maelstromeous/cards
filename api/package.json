@@ -12,7 +12,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/api/src/main.js",
+    "start:prod": "node dist/main.js",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -21,6 +21,7 @@
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts"
   },
   "dependencies": {
+    "@humanity-deck/shared": "workspace:*",
     "@nestjs/common": "^12.6.0",
     "@nestjs/config": "^12.1.1",
     "@nestjs/core": "^12.6.0",

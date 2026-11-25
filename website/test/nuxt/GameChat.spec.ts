@@ -2,9 +2,9 @@ import { describe, expect, it, vi } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { flushPromises } from '@vue/test-utils'
 import { GameChat } from '#components'
-import { GameChatType } from '#constants/GameChatType'
-import type { GameChatInterface } from '#interfaces/GameChatInterface'
-import type { GamePeopleInterface } from '#interfaces/GameInterface'
+import { GameChatType } from '@humanity-deck/shared/constants/GameChatType'
+import type { GameChatInterface } from '@humanity-deck/shared/interfaces/GameChatInterface'
+import type { GamePeopleInterface } from '@humanity-deck/shared/interfaces/GameInterface'
 
 const host = {
   id: 'p1',

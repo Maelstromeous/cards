@@ -5,9 +5,9 @@ import {
   colors,
   animals,
 } from 'unique-names-generator'
-import { GameTypes } from '#constants/GameTypes'
-import { GameStatus } from '#constants/GameStatus'
-import type { PackInterface } from '#interfaces/PackInterface'
+import { GameTypes } from '@humanity-deck/shared/constants/GameTypes'
+import { GameStatus } from '@humanity-deck/shared/constants/GameStatus'
+import type { PackInterface } from '@humanity-deck/shared/interfaces/PackInterface'
 
 useHead({ title: 'Host a game' })
 

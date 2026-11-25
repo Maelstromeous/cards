@@ -4,7 +4,7 @@ import request from 'supertest';
 import { AddressInfo } from 'net';
 import { io, Socket } from 'socket.io-client';
 import { AppModule } from './../src/app.module.js';
-import { CardType } from './../../constants/CardTypes.js';
+import { CardType } from '@humanity-deck/shared/constants/CardTypes';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;

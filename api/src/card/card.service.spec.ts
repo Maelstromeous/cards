@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CardService } from './card.service.js';
-import { CardType } from '../../../constants/CardTypes.js';
+import { CardType } from '@humanity-deck/shared/constants/CardTypes';
 
 describe('CardService', () => {
   let service: CardService;

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { GameCard } from '#components'
-import { CardType } from '#constants/CardTypes'
+import { CardType } from '@humanity-deck/shared/constants/CardTypes'
 
 describe('GameCard', () => {
   it('shows a white card as dark text on white', async () => {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { CardInterface } from '#interfaces/CardInterface'
-import { CardType } from '#constants/CardTypes'
+import type { CardInterface } from '@humanity-deck/shared/interfaces/CardInterface'
+import { CardType } from '@humanity-deck/shared/constants/CardTypes'
 
 const props = defineProps<{ card: CardInterface }>()
 

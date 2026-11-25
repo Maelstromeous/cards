@@ -6,8 +6,8 @@ import {
 import { GameService } from './game.service.js';
 import { CreateGameDto } from './dto/create-game.dto.js';
 import { UpdateGameDto } from './dto/update-game.dto.js';
-import { GameInterface } from '../../../interfaces/GameInterface.js';
-import { GameTypes } from '../../../constants/GameTypes.js';
+import { GameInterface } from '@humanity-deck/shared/interfaces/GameInterface';
+import { GameTypes } from '@humanity-deck/shared/constants/GameTypes';
 
 @WebSocketGateway({
   namespace: 'game',
