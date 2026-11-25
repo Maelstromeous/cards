@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GameService } from './game.service.js';
-import { GameStatus } from '../../../constants/GameStatus.js';
+import { GameStatus } from '@humanity-deck/shared/constants/GameStatus';
 
 describe('GameService', () => {
   let service: GameService;

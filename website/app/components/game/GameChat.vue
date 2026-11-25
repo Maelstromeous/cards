@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { format } from 'date-fns'
-import type { GameChatInterface } from '#interfaces/GameChatInterface'
-import type { GamePeopleInterface } from '#interfaces/GameInterface'
-import { GameChatType } from '#constants/GameChatType'
+import type { GameChatInterface } from '@humanity-deck/shared/interfaces/GameChatInterface'
+import type { GamePeopleInterface } from '@humanity-deck/shared/interfaces/GameInterface'
+import { GameChatType } from '@humanity-deck/shared/constants/GameChatType'
 
 const props = defineProps<{ gameId: string; people: GamePeopleInterface }>()
 

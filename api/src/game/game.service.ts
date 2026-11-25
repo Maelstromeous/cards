@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGameDto } from './dto/create-game.dto.js';
 import { UpdateGameDto } from './dto/update-game.dto.js';
-import { GameStatus } from '../../../constants/GameStatus.js';
-import { GameTypes } from '../../../constants/GameTypes.js';
-import { GameInterface } from '../../../interfaces/GameInterface.js';
+import { GameStatus } from '@humanity-deck/shared/constants/GameStatus';
+import { GameTypes } from '@humanity-deck/shared/constants/GameTypes';
+import { GameInterface } from '@humanity-deck/shared/interfaces/GameInterface';
 
 @Injectable()
 export class GameService {

@@ -1,5 +1,3 @@
-import { fileURLToPath } from 'node:url'
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2026-11-01',
@@ -12,13 +10,6 @@ export default defineNuxtConfig({
   colorMode: {
     preference: 'dark',
     fallback: 'dark',
-  },
-
-  // The shared types live at the repo root, outside this app. These aliases
-  // give them stable import paths and are added to the generated tsconfig.
-  alias: {
-    '#interfaces': fileURLToPath(new URL('../interfaces', import.meta.url)),
-    '#constants': fileURLToPath(new URL('../constants', import.meta.url)),
   },
 
   app: {

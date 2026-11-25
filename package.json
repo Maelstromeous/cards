@@ -1,6 +1,14 @@
 {
   "name": "humanity-deck",
   "private": true,
-  "type": "module",
-  "packageManager": "pnpm@10.28.0"
+  "packageManager": "pnpm@10.28.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm --filter api exec eslint \"{src,test}/**/*.ts\" && pnpm --filter cards lint",
+    "typecheck": "pnpm --filter api exec tsc --noEmit -p tsconfig.json && pnpm --filter cards typecheck"
+  },
+  "engines": {
+    "node": ">=26"
+  }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateGamechatDto } from './dto/create-gamechat.dto.js';
-import { GameChatInterface } from '../../../interfaces/GameChatInterface.js';
-import { GameChatType } from '../../../constants/GameChatType.js';
+import { GameChatInterface } from '@humanity-deck/shared/interfaces/GameChatInterface';
+import { GameChatType } from '@humanity-deck/shared/constants/GameChatType';
 
 @Injectable()
 export class GamechatService {

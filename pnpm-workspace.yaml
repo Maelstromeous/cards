@@ -1,13 +1,7 @@
 packages:
   - api
+  - shared
   - website
-
-# These two settings date from the Nuxt 2 website, which imported packages it
-# did not declare and clashed with the API's webpack 5 tooling in a shared
-# tree. The next step of the modernisation plan revisits both and moves to
-# one shared lockfile.
-shamefullyHoist: true
-sharedWorkspaceLockfile: false
 
 # None of these install scripts are needed: @nestjs/core only prints a
 # funding notice, esbuild's only checks its platform binary (installed as an

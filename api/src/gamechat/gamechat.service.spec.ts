@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { GamechatService } from './gamechat.service.js';
-import { GameChatType } from '../../../constants/GameChatType.js';
+import { GameChatType } from '@humanity-deck/shared/constants/GameChatType';
 
 describe('GamechatService', () => {
   let service: GamechatService;

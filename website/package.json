@@ -19,6 +19,7 @@
     "node": ">=26"
   },
   "dependencies": {
+    "@humanity-deck/shared": "workspace:*",
     "@iconify-json/lucide": "^1.2.159",
     "@nuxt/ui": "^4.13.1",
     "@vueuse/core": "^15.1.0",
